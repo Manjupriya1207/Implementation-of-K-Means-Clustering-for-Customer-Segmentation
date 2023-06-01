@@ -24,22 +24,39 @@ RegisterNumber: 212220220024
 */
 ```
 import pandas as pd
+
 import matplotlib.pyplot as plt
+
 data=pd.read_csv("/content/Mall_Customers (1).csv")
+
 data.head()
+
 data.info()
+
 data.isnull().sum()
+
 from sklearn.cluster import KMeans
+
 wcss=[]
+
 for i in range(1,11):
+
 kmeans=KMeans(n_clusters=i,init="k-means++")
+
 kmeans.fit(data.iloc[:,3:])
+
 wcss.append(kmeans.inertia_)
+
 plt.plot(range(1,11),wcss)
+
 plt.xlabel("No_of_Clusters")
+
 plt.ylabel("wcss")
+
 plt.title("Elbow Method")
+
 km=KMeans(n_clusters=5)
+
 km.fit(data.iloc[:,3:])
 y_pred=km.predict(data.iloc[:,3:])
 y_pred
